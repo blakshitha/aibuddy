@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Text Area Example</title>
+
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      margin-top: 100px;
+    }
+
+    .textarea {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      width: 100%;
+      height: 200px;
+      resize: vertical;
+      font-size: 16px;
+    }
+
+    .btn-custom {
+      background-color: #888;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-custom:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <form method="post" id="prompt-form">
+        <div class="form-group">
+        <textarea id="promptText" name="promptText" class="form-control textarea" rows="5" placeholder="Enter your text here..."></textarea>
+        </div>
+        <button id="btnSubmit" type="button" class="btn btn-custom">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(function () {
+        $('#btnSubmit').click(function (e) {
+            e.preventDefault();
+            $('#prompt-form').submit();
+        });
+
+        $('#prompt-form').submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/create",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        $('#promptText').val('');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+        });
+    });
+</script>
+</body>
+
+</html>
