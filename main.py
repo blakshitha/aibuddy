@@ -17,7 +17,7 @@ app = Flask(__name__)
 #############################################################
 
 # Store API key in environment variable
-os.environ['OPENAI_API_KEY'] = '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'
+# os.environ['OPENAI_API_KEY'] = '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'
 
 bot_module = importlib.import_module(f"bots.chat_completion")
 messages = bot_module.initialize_messages()
